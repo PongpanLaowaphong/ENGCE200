@@ -1,0 +1,93 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity Demultiplexers_1x16_tb is
+end Demultiplexers_1x16_tb;
+
+architecture Behavioral of Demultiplexers_1x16_tb is
+    -- Component Declaration for the Unit Under Test (UUT)
+    component Demultiplexers_1x16
+        Port (
+            D   : in  STD_LOGIC;
+            S   : in  STD_LOGIC_VECTOR(3 downto 0);
+            Y   : out STD_LOGIC_VECTOR(15 downto 0)
+        );
+    end component;
+
+    -- Testbench signals
+    signal D_tb : STD_LOGIC := '0';
+    signal S_tb : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
+    signal Y_tb : STD_LOGIC_VECTOR(15 downto 0);
+
+begin
+    -- Instantiate the Unit Under Test (UUT)
+    uut: Demultiplexers_1x16
+        Port map (
+            D => D_tb,
+            S => S_tb,
+            Y => Y_tb
+        );
+
+    -- Test process
+    stim_proc: process
+    begin
+	
+	-- Apply test vectors
+        D_tb <= '0';
+        
+        -- Loop through all possible values of S
+        for i in 0 to 15 loop
+            case i is
+                when 0  => S_tb <= "0000";
+                when 1  => S_tb <= "0001";
+                when 2  => S_tb <= "0010";
+                when 3  => S_tb <= "0011";
+                when 4  => S_tb <= "0100";
+                when 5  => S_tb <= "0101";
+                when 6  => S_tb <= "0110";
+                when 7  => S_tb <= "0111";
+                when 8  => S_tb <= "1000";
+                when 9  => S_tb <= "1001";
+                when 10 => S_tb <= "1010";
+                when 11 => S_tb <= "1011";
+                when 12 => S_tb <= "1100";
+                when 13 => S_tb <= "1101";
+                when 14 => S_tb <= "1110";
+                when 15 => S_tb <= "1111";
+                when others => S_tb <= "0000";
+            end case;
+            wait for 10 ns;
+        end loop;
+
+        -- Apply test vectors
+        D_tb <= '1';
+        
+        -- Loop through all possible values of S
+        for i in 0 to 15 loop
+            case i is
+                when 0  => S_tb <= "0000";
+                when 1  => S_tb <= "0001";
+                when 2  => S_tb <= "0010";
+                when 3  => S_tb <= "0011";
+                when 4  => S_tb <= "0100";
+                when 5  => S_tb <= "0101";
+                when 6  => S_tb <= "0110";
+                when 7  => S_tb <= "0111";
+                when 8  => S_tb <= "1000";
+                when 9  => S_tb <= "1001";
+                when 10 => S_tb <= "1010";
+                when 11 => S_tb <= "1011";
+                when 12 => S_tb <= "1100";
+                when 13 => S_tb <= "1101";
+                when 14 => S_tb <= "1110";
+                when 15 => S_tb <= "1111";
+                when others => S_tb <= "0000";
+            end case;
+            wait for 10 ns;
+        end loop;
+
+        -- End of simulation
+        wait;
+    end process;
+
+end Behavioral;
